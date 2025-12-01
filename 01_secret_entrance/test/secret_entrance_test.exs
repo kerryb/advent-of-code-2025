@@ -18,4 +18,14 @@ defmodule SecretEntranceTest do
       assert SecretEntrance.turn(10, "L20") == 90
     end
   end
+
+  describe "SecretEntrance.count_zeroes/2" do
+    test "does not change the count if the position is not 0" do
+      assert SecretEntrance.count_zeroes(50, 4) == 4
+    end
+
+    test "increments the count if the position is 0" do
+      assert SecretEntrance.count_zeroes(0, 4) == 5
+    end
+  end
 end
