@@ -8,6 +8,6 @@ defmodule SecretEntrance do
   end
 
   defp new_position(position, count, direction) do
-    position + String.to_integer(count) * direction
+    Integer.mod(position + String.to_integer(count) * direction, 100)
   end
 end
