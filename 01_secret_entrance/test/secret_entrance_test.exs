@@ -1,8 +1,3 @@
 defmodule SecretEntranceTest do
-  use ExUnit.Case
-  doctest SecretEntrance
-
-  test "greets the world" do
-    assert SecretEntrance.hello() == :world
-  end
+  use ExUnit.Case, async: true
 end
