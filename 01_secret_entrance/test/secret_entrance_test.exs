@@ -1,6 +1,25 @@
 defmodule SecretEntranceTest do
   use ExUnit.Case, async: true
 
+  describe "SecretEntrance.decode/1" do
+    test "returns the number of times the dial is on 0" do
+      input = """
+      L68
+      L30
+      R48
+      L5
+      R60
+      L55
+      L1
+      L99
+      R14
+      L82
+      """
+
+      assert SecretEntrance.decode(input) == 3
+    end
+  end
+
   describe "SecretEntrance.turn/2" do
     test "advances the position if turning right" do
       assert SecretEntrance.turn(10, "R32") == 42

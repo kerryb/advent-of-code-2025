@@ -1,4 +1,15 @@
 defmodule SecretEntrance do
+  def decode(input) do
+    input
+    |> String.split()
+    |> Enum.reduce({50, 0}, fn instruction, {position, total} ->
+      new_position = turn(position, instruction)
+      new_total = count_zeroes(new_position, total)
+      {new_position, new_total}
+    end)
+    |> then(&elem(&1, 1))
+  end
+
   def turn(position, <<"R", distance::binary>>), do: new_position(position, distance, 1)
   def turn(position, <<"L", distance::binary>>), do: new_position(position, distance, -1)
 
