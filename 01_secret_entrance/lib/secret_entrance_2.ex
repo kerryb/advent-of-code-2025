@@ -12,7 +12,8 @@ defmodule SecretEntrance2 do
     {Integer.mod(new_position, 100), total + zero_count(position, new_position)}
   end
 
-  defp zero_count(_position, new_position) when new_position >= 0, do: div(new_position, 100)
+  defp zero_count(_position, new_position) when new_position > 0, do: div(new_position, 100)
+  defp zero_count(_position, new_position) when new_position == 0, do: 1
   defp zero_count(0, new_position), do: div(abs(new_position), 100)
   defp zero_count(_position, new_position), do: div(abs(new_position), 100) + 1
 end

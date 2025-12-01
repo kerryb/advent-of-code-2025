@@ -18,8 +18,12 @@ defmodule SecretEntrance2Test do
       assert SecretEntrance2.turn(10, 0, "L20") == {90, 1}
     end
 
-    test "increments the total when landing on zero" do
+    test "increments the total when landing on zero turning right" do
       assert SecretEntrance2.turn(90, 0, "R10") == {0, 1}
+    end
+
+    test "increments the total when landing on zero turning left" do
+      assert SecretEntrance2.turn(10, 0, "L10") == {0, 1}
     end
 
     test "increments the total once per revolution when turning right by more than 100" do
