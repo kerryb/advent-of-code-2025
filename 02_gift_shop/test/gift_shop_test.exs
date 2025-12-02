@@ -30,37 +30,41 @@ defmodule GiftShopTest do
 
   describe "GiftShop.invalid?/1" do
     test "returns true for a repeated digit" do
-      assert GiftShop.invalid?("55")
+      assert GiftShop.invalid?(55)
     end
 
     test "returns true for a repeated multi-digit number" do
-      assert GiftShop.invalid?("123123")
+      assert GiftShop.invalid?(123_123)
     end
 
     test "returns false for a non-repetitive number" do
-      refute GiftShop.invalid?("12321")
+      refute GiftShop.invalid?(12321)
     end
   end
 
   describe "GiftShop.invalid2?/1" do
     test "returns true for a repeated digit" do
-      assert GiftShop.invalid2?("55")
+      assert GiftShop.invalid2?(55)
     end
 
     test "returns true for a multiply repeated digit" do
-      assert GiftShop.invalid2?("555")
+      assert GiftShop.invalid2?(555)
     end
 
     test "returns true for a repeated multi-digit number" do
-      assert GiftShop.invalid2?("123123")
+      assert GiftShop.invalid2?(123_123)
     end
 
     test "returns true for a multiply repeated multi-digit number" do
-      assert GiftShop.invalid2?("123123123123123")
+      assert GiftShop.invalid2?(123_123_123_123_123)
+    end
+
+    test "returns false for a single digit number" do
+      refute GiftShop.invalid2?(1)
     end
 
     test "returns false for a non-repetitive number" do
-      refute GiftShop.invalid2?("12321")
+      refute GiftShop.invalid2?(12321)
     end
   end
 end

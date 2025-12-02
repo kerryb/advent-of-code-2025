@@ -22,6 +22,8 @@ defmodule GiftShop do
     match?({a, a}, String.split_at(string, div(String.length(string), 2)))
   end
 
+  def invalid2?(number) when number < 10, do: false
+
   def invalid2?(number) do
     string = to_string(number)
 
