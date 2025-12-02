@@ -1,8 +1,8 @@
 defmodule GiftShop do
-  def run(input) do
+  def run(input, fun) do
     input
     |> ranges()
-    |> Enum.flat_map(fn range -> Enum.filter(range, &invalid?/1) end)
+    |> Enum.flat_map(fn range -> Enum.filter(range, fun) end)
     |> Enum.sum()
   end
 
@@ -20,5 +20,13 @@ defmodule GiftShop do
   def invalid?(number) do
     string = to_string(number)
     match?({a, a}, String.split_at(string, div(String.length(string), 2)))
+  end
+
+  def invalid2?(number) do
+    string = to_string(number)
+
+    Enum.any?(1..div(String.length(string), 2), fn length ->
+      string =~ ~r/^(#{String.slice(string, 0, length)})*$/
+    end)
   end
 end
