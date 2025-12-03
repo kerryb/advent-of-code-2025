@@ -1,0 +1,2 @@
+defmodule Lobby do
+end
