@@ -1,21 +1,20 @@
 defmodule Lobby2Test do
   use ExUnit.Case, async: true
 
-  describe "Lobby2.pad/1" do
-    test "pads a list with leading zeroes to 12 elements" do
-      assert Lobby2.pad([1, 2, 3, 4, 5, 6]) == [0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6]
-    end
-  end
-
   describe "Lobby2.update_list/2" do
-    test "leaves the list as-is if no element is smaller than the digit" do
-      list = [3, 4, 5, 6, 3, 3, 3, 9, 5, 6, 4, 7]
+    test "leaves the list as-is if the digit is no bigger than any element" do
+      list = [3, 4, 5]
       assert Lobby2.update_list(list, 3) == list
     end
 
-    test "returns the digit and 11 zeroes if the digit is bigger than the first element" do
-      list = [3, 4, 5, 6, 3, 3, 3, 9, 5, 6, 4, 7]
-      assert Lobby2.update_list(list, 4) == [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    test "replaces the leftmost element with the digit and the rest with zeroes if it is smaller than the digit" do
+      list = [3, 4, 5, 6]
+      assert Lobby2.update_list(list, 4) == [4, 0, 0, 0]
+    end
+
+    test "replaces the leftmost element smaller than the digit with the digit and the rest with zeroes" do
+      list = [8, 6, 5, 6, 3, 3, 3]
+      assert Lobby2.update_list(list, 4) == [8, 6, 5, 6, 4, 0, 0, 0]
     end
   end
 

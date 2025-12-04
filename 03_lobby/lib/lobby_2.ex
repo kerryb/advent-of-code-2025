@@ -1,8 +1,8 @@
 defmodule Lobby2 do
-  def max_dozen(string), do: max_dozen(string, Range.to_list(1..12))
+  def max_dozen(string), do: max_dozen(string, [])
 
-  defp max_dozen(<<rest::binary-size(11)>>, acc) do
-    Enum.reduce(acc, 0, fn digit, acc -> acc * 10 + digit end) + String.to_integer(rest)
+  defp max_dozen("", acc) do
+    Enum.reduce(acc, 0, fn digit, acc -> acc * 10 + digit end)
   end
 
   defp max_dozen(<<char::binary-size(1), rest::binary>>, acc) do
@@ -15,12 +15,10 @@ defmodule Lobby2 do
 
   def update_list([head | tail], digit, result) do
     if digit > head do
-      Enum.reverse(pad([digit | result]))
+      Enum.reverse([digit | result]) ++
+        (Stream.repeatedly(fn -> 0 end) |> Enum.take(length(tail)))
     else
       update_list(tail, digit, [head | result])
     end
   end
-
-  def pad(list) when length(list) == 12, do: list
-  def pad(list), do: pad([0 | list])
 end
