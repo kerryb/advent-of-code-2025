@@ -1,0 +1,2 @@
+defmodule PrintingDepartment do
+end
