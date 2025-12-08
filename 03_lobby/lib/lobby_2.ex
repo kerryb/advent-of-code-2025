@@ -1,24 +1,24 @@
 defmodule Lobby2 do
-  def max_dozen(string), do: max_dozen(string, [])
-
-  defp max_dozen("", acc) do
-    Enum.reduce(acc, 0, fn digit, acc -> acc * 10 + digit end)
+  def total(input) do
+    input
+    |> String.split()
+    |> Enum.reduce(0, fn str, acc -> acc + max_dozen(str) end)
   end
 
-  defp max_dozen(<<char::binary-size(1), rest::binary>>, acc) do
-    digit = String.to_integer(char)
-    max_dozen(rest, update_list(acc, digit))
+  def max_dozen(string) do
+    string
+    |> String.codepoints()
+    |> Enum.map(&String.to_integer/1)
+    |> max_dozen([])
+    |> Enum.reduce(0, fn digit, acc -> acc * 10 + digit end)
   end
 
-  def update_list(list, digit, result \\ [])
-  def update_list([], _digit, result), do: Enum.reverse(result)
+  defp max_dozen(numbers, acc) when length(numbers) + length(acc) >= 12, do: acc ++ numbers
+  defp max_dozen([], acc), do: Enum.take(acc, 12)
+  defp max_dozen([head | tail], acc), do: max_dozen(tail, update_list(acc, head))
 
-  def update_list([head | tail], digit, result) do
-    if digit > head do
-      Enum.reverse([digit | result]) ++
-        (Stream.repeatedly(fn -> 0 end) |> Enum.take(length(tail)))
-    else
-      update_list(tail, digit, [head | result])
-    end
-  end
+  def update_list(list, digit), do: list |> update_list(digit, []) |> Enum.reverse()
+  defp update_list([], digit, result), do: [digit | result]
+  defp update_list([head | _tail], digit, result) when digit > head, do: [digit | result]
+  defp update_list([head | tail], digit, result), do: update_list(tail, digit, [head | result])
 end
