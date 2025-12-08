@@ -44,13 +44,8 @@ defmodule PrintingDepartmentTest do
   end
 
   describe "PrintingDepartment.count_neighbours/1" do
-    test "returns a map of coordinates to neighbour counts" do
-      assert PrintingDepartment.count_neighbours([{1, 0}, {0, 1}, {2, 1}, {2, 2}]) == %{
-               {1, 0} => 2,
-               {0, 1} => 1,
-               {2, 1} => 2,
-               {2, 2} => 1
-             }
+    test "returns a list of neighbour counts" do
+      assert PrintingDepartment.count_neighbours([{1, 0}, {0, 1}, {2, 1}, {2, 2}]) == [2, 1, 2, 1]
     end
   end
 end
