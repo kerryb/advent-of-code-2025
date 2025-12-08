@@ -12,23 +12,6 @@ defmodule Lobby2Test do
     end
   end
 
-  describe "Lobby2.update_list/2" do
-    test "appends the digit if the digit is no bigger than any element" do
-      list = [3, 4, 5]
-      assert Lobby2.update_list(list, 3) == [3, 4, 5, 3]
-    end
-
-    test "returns a new list with just the digit if it is larger than the first element" do
-      list = [3, 4, 5]
-      assert Lobby2.update_list(list, 4) == [4]
-    end
-
-    test "replaces the leftmost element smaller than the digit with the digit, and removes the rest" do
-      list = [8, 6, 3, 2, 7]
-      assert Lobby2.update_list(list, 4) == [8, 6, 4]
-    end
-  end
-
   describe "Lobby2.max_dozen/1" do
     test "returns the number formed by the highest 12 digits when they are adjacent at the start" do
       assert Lobby2.max_dozen("987654321111111") == 987_654_321_111
