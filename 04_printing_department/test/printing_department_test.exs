@@ -18,6 +18,23 @@ defmodule PrintingDepartmentTest do
     end
   end
 
+  describe "PrintingDepartment.remove_all_accessible/1" do
+    test "returns the total number of rolls removed" do
+      assert PrintingDepartment.remove_all_accessible("""
+             ..@@.@@@@.
+             @@@.@.@.@@
+             @@@@@.@.@@
+             @.@@@@..@.
+             @@.@@@@.@@
+             .@@@@@@@.@
+             .@.@.@.@@@
+             @.@@@.@@@@
+             .@@@@@@@@.
+             @.@.@@@.@.
+             """) == 43
+    end
+  end
+
   describe "PrintingDepartment.find_removable/1" do
     test "returns the number of rolls with fewer than four neighbours" do
       assert PrintingDepartment.find_removable(%{
@@ -26,6 +43,30 @@ defmodule PrintingDepartmentTest do
                {2, 1} => 4,
                {2, 2} => 3
              }) == [{1, 0}, {2, 2}]
+    end
+  end
+
+  describe "PrintingDepartment.remove/1" do
+    test "removes rolls with fewer than four neighbours" do
+      assert %{
+               {1, 0} => 2,
+               {0, 1} => 5,
+               {2, 1} => 4,
+               {2, 2} => 3
+             }
+             |> PrintingDepartment.remove()
+             |> Map.keys() == [{0, 1}, {2, 1}]
+    end
+
+    test "decrements the neighbour counts of neighbours of removed rolls" do
+      assert %{
+               {1, 0} => 2,
+               {0, 1} => 5,
+               {2, 1} => 4,
+               {2, 2} => 3
+             }
+             |> PrintingDepartment.remove() ==
+               %{{0, 1} => 4, {2, 1} => 2}
     end
   end
 
