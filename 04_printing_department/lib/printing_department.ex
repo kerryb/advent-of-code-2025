@@ -4,7 +4,7 @@ defmodule PrintingDepartment do
     |> parse()
     |> count_neighbours()
     |> Enum.reduce(0, fn
-      count, acc when count < 4 -> acc + 1
+      {_, count}, acc when count < 4 -> acc + 1
       _, acc -> acc
     end)
   end
@@ -21,7 +21,7 @@ defmodule PrintingDepartment do
   defp parse_cell(_, _), do: []
 
   def count_neighbours(coordinate_list) do
-    coordinate_list |> Enum.map(&count_neighbours(&1, coordinate_list))
+    coordinate_list |> Map.new(&{&1, count_neighbours(&1, coordinate_list)})
   end
 
   defp count_neighbours(coordinates, coordinate_list) do
