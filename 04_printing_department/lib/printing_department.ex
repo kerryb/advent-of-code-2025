@@ -1,11 +1,11 @@
 defmodule PrintingDepartment do
   def count_removable(input) do
-    input |> parse() |> count_neighbours() |> find_removable() |> length()
+    input |> parse() |> find_neighbours() |> find_removable() |> length()
   end
 
   def find_removable(counts) do
     Enum.flat_map(counts, fn
-      {coordinates, count} when count < 4 -> [coordinates]
+      {coordinates, neighbours} when length(neighbours) < 4 -> [coordinates]
       _ -> []
     end)
   end
@@ -21,12 +21,12 @@ defmodule PrintingDepartment do
   defp parse_cell({"@", x}, y), do: [{x, y}]
   defp parse_cell(_, _), do: []
 
-  def count_neighbours(coordinate_list) do
-    coordinate_list |> Map.new(&{&1, count_neighbours(&1, coordinate_list)})
+  def find_neighbours(coordinate_list) do
+    coordinate_list |> Map.new(&{&1, find_neighbours(&1, coordinate_list)})
   end
 
-  defp count_neighbours(coordinates, coordinate_list) do
-    Enum.count(neighbours(coordinates), &(&1 in coordinate_list))
+  defp find_neighbours(coordinates, coordinate_list) do
+    Enum.filter(neighbours(coordinates), &(&1 in coordinate_list))
   end
 
   def neighbours({x, y}) do
