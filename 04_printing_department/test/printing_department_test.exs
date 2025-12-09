@@ -1,9 +1,9 @@
 defmodule PrintingDepartmentTest do
   use ExUnit.Case
 
-  describe "PrintingDepartment.run/1" do
+  describe "PrintingDepartment.count_removable/1" do
     test "returns the number of rolls with fewer than four neighbours" do
-      assert PrintingDepartment.run("""
+      assert PrintingDepartment.count_removable("""
              ..@@.@@@@.
              @@@.@.@.@@
              @@@@@.@.@@
@@ -15,6 +15,17 @@ defmodule PrintingDepartmentTest do
              .@@@@@@@@.
              @.@.@@@.@.
              """) == 13
+    end
+  end
+
+  describe "PrintingDepartment.find_removable/1" do
+    test "returns the number of rolls with fewer than four neighbours" do
+      assert PrintingDepartment.find_removable(%{
+               {1, 0} => 2,
+               {0, 1} => 5,
+               {2, 1} => 4,
+               {2, 2} => 3
+             }) == [{1, 0}, {2, 2}]
     end
   end
 

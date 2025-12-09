@@ -1,11 +1,12 @@
 defmodule PrintingDepartment do
-  def run(input) do
-    input
-    |> parse()
-    |> count_neighbours()
-    |> Enum.reduce(0, fn
-      {_, count}, acc when count < 4 -> acc + 1
-      _, acc -> acc
+  def count_removable(input) do
+    input |> parse() |> count_neighbours() |> find_removable() |> length()
+  end
+
+  def find_removable(counts) do
+    Enum.flat_map(counts, fn
+      {coordinates, count} when count < 4 -> [coordinates]
+      _ -> []
     end)
   end
 
