@@ -19,6 +19,19 @@ defmodule CafeteriaTest do
     end
   end
 
+  describe "Cafeteria.fresh_range_size/1" do
+    test "returns the number of IDs covered by all the ranges" do
+      assert Cafeteria.fresh_range_size("""
+             3-5
+             10-14
+             16-20
+             12-18
+
+             1
+             """) == 14
+    end
+  end
+
   describe "Cafeteria.parse/1" do
     test "returns the ranges and ids" do
       assert Cafeteria.parse("""
