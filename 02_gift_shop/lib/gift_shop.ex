@@ -1,4 +1,5 @@
 defmodule GiftShop do
+  @moduledoc false
   def run(input, fun) do
     input
     |> ranges()

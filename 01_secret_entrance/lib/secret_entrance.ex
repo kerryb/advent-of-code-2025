@@ -1,4 +1,5 @@
 defmodule SecretEntrance do
+  @moduledoc false
   def decode(input) do
     input
     |> String.split()
@@ -7,7 +8,7 @@ defmodule SecretEntrance do
       new_total = count_zeroes(new_position, total)
       {new_position, new_total}
     end)
-    |> then(&elem(&1, 1))
+    |> elem(1)
   end
 
   def turn(position, <<"R", distance::binary>>), do: new_position(position, distance, 1)

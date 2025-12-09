@@ -38,7 +38,7 @@ defmodule GiftShopTest do
     end
 
     test "returns false for a non-repetitive number" do
-      refute GiftShop.invalid?(12321)
+      refute GiftShop.invalid?(12_321)
     end
   end
 
@@ -64,7 +64,7 @@ defmodule GiftShopTest do
     end
 
     test "returns false for a non-repetitive number" do
-      refute GiftShop.invalid2?(12321)
+      refute GiftShop.invalid2?(12_321)
     end
   end
 end

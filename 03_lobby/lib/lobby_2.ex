@@ -1,4 +1,5 @@
 defmodule Lobby2 do
+  @moduledoc false
   def total(input) do
     input
     |> String.split()

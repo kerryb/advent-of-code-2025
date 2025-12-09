@@ -1,4 +1,5 @@
 defmodule PrintingDepartment do
+  @moduledoc false
   def count_removable(input) do
     input |> parse() |> count_neighbours() |> find_removable() |> length()
   end
@@ -48,7 +49,7 @@ defmodule PrintingDepartment do
   defp parse_cell(_, _), do: []
 
   def count_neighbours(coordinate_list) do
-    coordinate_list |> Map.new(&{&1, count_neighbours(&1, coordinate_list)})
+    Map.new(coordinate_list, &{&1, count_neighbours(&1, coordinate_list)})
   end
 
   defp count_neighbours(coordinates, coordinate_list) do

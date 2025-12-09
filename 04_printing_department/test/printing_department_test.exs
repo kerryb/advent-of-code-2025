@@ -59,13 +59,7 @@ defmodule PrintingDepartmentTest do
     end
 
     test "decrements the neighbour counts of neighbours of removed rolls" do
-      assert %{
-               {1, 0} => 2,
-               {0, 1} => 5,
-               {2, 1} => 4,
-               {2, 2} => 3
-             }
-             |> PrintingDepartment.remove() ==
+      assert PrintingDepartment.remove(%{{1, 0} => 2, {0, 1} => 5, {2, 1} => 4, {2, 2} => 3}) ==
                %{{0, 1} => 4, {2, 1} => 2}
     end
   end
