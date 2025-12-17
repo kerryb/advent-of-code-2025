@@ -23,4 +23,8 @@ defmodule MovieTheater do
   end
 
   defp area({x, y}, {xx, yy}), do: (abs(x - xx) + 1) * (abs(y - yy) + 1)
+
+  def draw_loop(points) do
+    Map.new(points, &{&1, :red})
+  end
 end
