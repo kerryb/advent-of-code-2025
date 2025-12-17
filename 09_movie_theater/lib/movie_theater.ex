@@ -25,6 +25,18 @@ defmodule MovieTheater do
   defp area({x, y}, {xx, yy}), do: (abs(x - xx) + 1) * (abs(y - yy) + 1)
 
   def draw_loop(points) do
-    Map.new(points, &{&1, :red})
+    [List.last(points) | points]
+    |> Enum.chunk_every(2, 1, :discard)
+    |> Enum.reduce(%{}, fn [previous_point, point], acc -> add_point(previous_point, point, acc) end)
   end
+
+  defp add_point(previous_point, point, grid) do
+    previous_point |> line(point) |> Enum.reduce(grid, &Map.put(&2, &1, :green)) |> Map.put(point, :red)
+  end
+
+  defp line({x, y1}, {x, y2}) when y2 - y1 >= 2, do: Enum.map((y1 + 1)..(y2 - 1), &{x, &1})
+  defp line({x, y1}, {x, y2}) when y1 - y2 >= 2, do: Enum.map((y2 + 1)..(y1 - 1), &{x, &1})
+  defp line({x1, y}, {x2, y}) when x2 - x1 >= 2, do: Enum.map((x1 + 1)..(x2 - 1), &{&1, y})
+  defp line({x1, y}, {x2, y}) when x1 - x2 >= 2, do: Enum.map((x2 + 1)..(x1 - 1), &{&1, y})
+  defp line(_, _), do: []
 end

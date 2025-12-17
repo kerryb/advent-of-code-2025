@@ -18,7 +18,7 @@ defmodule MovieTheaterTest do
   end
 
   describe "MovieTheater.draw_loop/1" do
-    test "sets the points to red" do
+    test "sets the points to red, and the lines between them to green" do
       assert """
              7,1
              11,1
@@ -33,13 +33,13 @@ defmodule MovieTheaterTest do
              |> MovieTheater.draw_loop()
              |> to_grid() ==
                String.trim("""
-               .....#...#
-               ..........
-               #....#....
-               ..........
-               #......#..
-               ..........
-               .......#.#
+               .....#XXX#
+               .....X...X
+               #XXXX#...X
+               X........X
+               #XXXXXX#.X
+               .......X.X
+               .......#X#
                """)
     end
   end
